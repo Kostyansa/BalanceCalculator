@@ -4,9 +4,26 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
+    public static double balance = 0.0;
+
+    public static double GetTransactionFromConsole(Scanner in) {
+        while (true) {
+            try {
+                double transaction = in.nextDouble();
+                return transaction;
+            } catch (InputMismatchException exc) {
+                System.out.println("Необходимо ввести вещественное число разделенное запятой");
+            }
+        }
+    }
+
+    public static void UpdateBalance(double transaction) {
+        balance += transaction;
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        double balance = 0.0;
         double vklad = 0.0;
         double income = 0.0;
         double expenses = 0.0;
@@ -23,17 +40,13 @@ public class Main {
             n = in.nextByte();
 
             if (n == 1) {
-                try {
-                    double transaction = in.nextDouble();
-                    balance += transaction;
-                    if (transaction >= 0) {
-                        income += transaction;
-                    }
-                    else {
-                        expenses += transaction;
-                    }
-                } catch (InputMismatchException exc) {
-                    System.out.println("Необходимо ввести вещественное число разделенное запятой");
+                double transaction = GetTransactionFromConsole(in);
+                UpdateBalance(transaction);
+                if (transaction >= 0) {
+                    income += transaction;
+                }
+                else {
+                    expenses += transaction;
                 }
             } else if (n == 2) {
                 System.out.println("Спасибо за пользование");
@@ -48,7 +61,7 @@ public class Main {
                 System.out.println("На конец месяца баланс вашего вклада составляет: "+ vklad);
                 System.out.println("Доходы за месяц: " + income);
                 income = 0;
-                System.out.println("Доходы за месяц: " + expenses);
+                System.out.println("Расходы за месяц: " + expenses);
                 expenses = 0;
             } else if (n == 4) {
                 System.out.println("Введите сумму, которую хотите положить на вклад");
