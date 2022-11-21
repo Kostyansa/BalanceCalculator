@@ -8,6 +8,8 @@ public class Main {
         Scanner in = new Scanner(System.in);
         double balance = 0.0;
         double vklad = 0.0;
+        double income = 0.0;
+        double expenses = 0.0;
         System.out.println("Расчет Баланса");
         System.out.println("Введите сумму с точностью до копеек");
         System.out.println("Разделяйте рубли и копейки запятой");
@@ -24,6 +26,12 @@ public class Main {
                 try {
                     double transaction = in.nextDouble();
                     balance += transaction;
+                    if (transaction >= 0) {
+                        income += transaction;
+                    }
+                    else {
+                        expenses += transaction;
+                    }
                 } catch (InputMismatchException exc) {
                     System.out.println("Необходимо ввести вещественное число разделенное запятой");
                 }
@@ -38,6 +46,10 @@ public class Main {
                 System.out.println("По вкладу вам начислено: " + ((vklad / 100) * 10));
                 vklad += (vklad / 100) * 10;
                 System.out.println("На конец месяца баланс вашего вклада составляет: "+ vklad);
+                System.out.println("Доходы за месяц: " + income);
+                income = 0;
+                System.out.println("Доходы за месяц: " + expenses);
+                expenses = 0;
             } else if (n == 4) {
                 System.out.println("Введите сумму, которую хотите положить на вклад");
                 double transaction = in.nextDouble();
