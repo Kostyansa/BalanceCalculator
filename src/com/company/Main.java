@@ -52,9 +52,7 @@ public class Main {
                 }
             } else {
                 System.out.println("Выберите опцию от 1 до 4");
-
             }
-
         }
     }
 }
