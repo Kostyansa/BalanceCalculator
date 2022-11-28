@@ -46,7 +46,7 @@ public class Main {
                     income += transaction;
                 }
                 else {
-                    expenses += transaction;
+                    expenses -= transaction;
                 }
             } else if (n == 2) {
                 System.out.println("Спасибо за пользование");
